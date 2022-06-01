@@ -12,9 +12,16 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
 import ptlocale from '@fullcalendar/core/locales/pt'
 import CalendarPopup from '../components/CalendarPopup';
+
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+
 var calendarApi = null
 var select = null
 var click = null
+
+
 
 Array.prototype.indexOfForArrays = function(search)
 {
@@ -31,6 +38,7 @@ export default class DemoApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {popupopen: false,
+                  snack: false,
                   popupstate: { title: "",
                                 paciente: "",
                               }
@@ -41,6 +49,7 @@ export default class DemoApp extends React.Component {
     weekendsVisible: true,
     currentEvents: [],
     daropen: false, //!importante
+    
 
 
   }
@@ -85,6 +94,27 @@ export default class DemoApp extends React.Component {
       </div>
       { this.state.popupopen && <MarcarConsultaPopup close={this.handlePopupClose.bind(this)} submit={this.handlePopupSubmit.bind(this)} />} 
       { this.state.daropen &&   <DarConsultaPopup    close={this.handlePopupClose.bind(this)} descricao= { click.event.title } paciente={ click.event.extendedProps.paciente} delete={this.handleapagar.bind(this)}/>}
+      
+      {this.state.snack && 
+            <Snackbar
+            
+              open={ this.state.snack }
+              onClose={this.handlesnackClose}
+              autoHideDuration={2000}
+              // other Snackbar props
+            >
+        
+              <MuiAlert
+                onClose={this.handlesnackClose}
+                severity="success"
+                elevation={6}
+                variant="filled"
+                sx={{ width: '100%' }}
+              >
+                Ação realizada com sucesso!
+              </MuiAlert>
+            </Snackbar>}
+      
       </>
     )
   }
@@ -95,6 +125,18 @@ export default class DemoApp extends React.Component {
   // }
   
   
+  handlesnackOpen = () => this.setState({ snack: true });
+
+  handlesnackClose = () => this.setState({ snack: false });
+
+
+
+
+
+
+
+
+
   handleChange = (info) => {
     let events= JSON.parse(localStorage.getItem('events'))
     if (events.indexOfForArrays([info.oldEvent._def.title, info.oldEvent._def.extendedProps.paciente, info.oldEvent.startStr, info.oldEvent.endStr]) === 0) {
@@ -138,6 +180,7 @@ export default class DemoApp extends React.Component {
   handlePopupClose = () => {
     this.setState({popupopen: false});
     this.setState({daropen: false});
+    this.handlesnackOpen();
   }
   
   handlePopupSubmit = (title, paciente) => {
@@ -168,12 +211,7 @@ export default class DemoApp extends React.Component {
 
   }
 
-  handleWeekendsToggle = () => {
-    this.setState({
-      weekendsVisible: !this.state.weekendsVisible
-    })
-    //<CalendarPopup />
-  }
+
 
   handleDateSelect = (selectInfo) => {
     calendarApi = selectInfo.view.calendar
