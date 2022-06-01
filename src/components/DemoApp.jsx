@@ -106,7 +106,7 @@ export default class DemoApp extends React.Component {
         
               <MuiAlert
                 onClose={this.handlesnackClose}
-                severity="success"
+                severity="info"
                 elevation={6}
                 variant="filled"
                 sx={{ width: '100%' }}
@@ -177,10 +177,16 @@ export default class DemoApp extends React.Component {
   handleapagar = () => {
     click.event.remove()
   }
-  handlePopupClose = () => {
+  handlePopupClose = (arg) => {
     this.setState({popupopen: false});
     this.setState({daropen: false});
-    this.handlesnackOpen();
+    if (arg) {
+      
+    }
+    else{
+      this.handlesnackOpen() ;
+    }
+   
   }
   
   handlePopupSubmit = (title, paciente) => {

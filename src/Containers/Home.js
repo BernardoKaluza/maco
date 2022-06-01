@@ -16,6 +16,9 @@ import { useState } from 'react'
 import { Component } from 'react';
 
 
+import IconButton from '@mui/material/IconButton';
+
+
 import { NavLink } from 'react-router-dom';
 
 import { NavLink as Link } from 'react-router-dom';
@@ -23,35 +26,13 @@ import { NavLink as Link } from 'react-router-dom';
 import Notification from '../components/Notification';
 import DemoApp from '../components/DemoApp';
 
+import HelpPopup from '../components/HelpPopup';
+
+const notificationHandler = () => {
+
+}
 
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
-const LayoutContainerCima = styled('div')(() => ({
-  width: '100%',
-  height:'15vw',
-  bgcolor:'#ffa ',
-  border:'1px solid #000',
-  justifyContent:'center',
-  alignItems:'center',
-  display: 'flex'
-
-}));
-const LayoutContainerBaixo = styled('div')(() => ({
-  width: '100%',
-  height:'5vw',
-  border:'1px solid #000',
-  justifyContent:'center',
-  alignItems:'center',
-  paddingTop:'1vw'
-
-}));
 
 export default class Home extends Component {
 
@@ -62,7 +43,7 @@ export default class Home extends Component {
     this.state = {
         page:1,
         TODO:"",
-        notificationopen:false
+        notificationopen:false,
     }
 
   }  
@@ -91,6 +72,7 @@ export default class Home extends Component {
 
         <Grid sx={{border:1,justifyContent:'center',alignItems:'center',display: 'flex'}} item xs={9}>
           <DemoApp  />
+          
         </Grid>
 
          <Grid sx={{border:1,paddingRight:'1vw'}} item xs={3}>
@@ -98,13 +80,16 @@ export default class Home extends Component {
             <Grid>
               <Stack sx = {{justifyContent:'center',alignItems:'center',display: 'flex'}}direction='column' spacing={5}>
                 <Grid container spacing={1}>
-                  <Grid item xs={2} sx={{alignItems:'right',justifyContent:'right'}}>
+                  <Grid item xs={2} sx={{alignItems:'right',justifyContent:'right'}} onMouseEnter={this.notificationHandler} >
                     <div onClick={this.openNotification}>
-                      <Avatar  alt="ERROR" src={ require("../image/bell.png")} />
+                      <IconButton color="primary" aria-label="upload picture" component="span">
+                        <Avatar  alt="ERROR" src={ require("../image/bell.png")} />
+                      </IconButton>
                       {this.state.notificationopen && <Notification/>}
                     </div>
                   </Grid>
                   <Grid item xs={10}>
+                    
                     <h3>
                     Próxima Consulta: 02/06 às 15:00
                     </h3>
@@ -137,6 +122,11 @@ export default class Home extends Component {
 
             />
             </Grid>
+            <Grid sx={{paddingTop:'1vw',paddingBottom:'1vw', justifyContent:'right',alignItems:'center',display: 'flex',paddingTop:'14vw'}}>
+              <div onClick={this.openHelp} sx ={{display:'flex'}}>
+                <HelpPopup/>
+              </div>
+            </Grid>
         </Grid>
     </Grid>
     </React.Fragment>
@@ -146,6 +136,7 @@ export default class Home extends Component {
 openNotification = () =>{
   this.setState({notificationopen : !this.state.notificationopen}) 
 }
+
 
 }
 

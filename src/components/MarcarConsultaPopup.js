@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
+
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react'
 
@@ -22,7 +22,7 @@ import {utentes} from '../data/utentes.js'
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 // import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 // import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import Stack from '@mui/material/Stack';
+
 
 export default function MarcarConsultaPopup(props) {
 
@@ -37,7 +37,7 @@ export default function MarcarConsultaPopup(props) {
 
   const handleClose = () => {
     setOpen(false);
-    if (props.close!=null) props.close()
+    if (props.close!=null) props.close(true)
   
   };
   const handleCloseSend = () => {

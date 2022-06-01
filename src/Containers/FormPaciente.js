@@ -15,6 +15,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
+
 function FormPaciente  ()  {
   return (
     <>
@@ -31,7 +32,7 @@ function FormPaciente  ()  {
           </Grid>
 
           <Grid item xs={12} sx={{height:'5vw',justifyContent:'center',alignItems:'center',display: 'flex'}}>
-            <TextField variant='outlined' label ='Data de Nascimento' sx ={{width:'99%'}}>
+            <TextField InputLabelProps={{shrink: true}} label ='Data de Nascimento' type = 'date' variant='outlined' sx ={{width:'99%'}}>
             </TextField>
           </Grid>
           

@@ -5,7 +5,6 @@ import {
   Bars,
   NavMenu,
   NavBtn,
-  NavBtnLink
 } from './NavbarElements';
 
 import { SignOutButton } from './signoutbutton';

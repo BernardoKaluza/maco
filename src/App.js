@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Navbar from './components/navbar'
 
 import Home from './Containers/Home'
 import About from './Containers/about'
@@ -15,7 +14,6 @@ import Register from './Containers/Register';
 import PerfilPaciente from './Containers/PerfilPaciente';
 import Calendario from './Containers/Calendario';
 import FormPaciente from './Containers/FormPaciente';
-import { red } from '@mui/material/colors';
 
 
 import { ThemeProvider, createTheme} from '@mui/material/styles';
