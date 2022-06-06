@@ -25,43 +25,53 @@ export default class PerfilPaciente extends Component {
 
     //const [page, setPage] = React.useState(1);
     //const handleChange = (event, value) => {
-        
+
      //   setPage(value);
     //};
 
     constructor(props) {
         super(props);
-    
+
         this.state = {
             page:1,
             DescPaciente:"",
             NotasPaciente:"",
         }
-    
-    }    
 
-    getStateFromLocalStorage = () => { 
-        let data = localStorage.getItem('Notas'); 
-        let data2 = localStorage.getItem('DescricaoPaciente'); 
+    }
+
+    getStateFromLocalStorage = () => {
+        let data = localStorage.getItem('Notas');
+        let data2 = localStorage.getItem('DescricaoPaciente');
         if(data !== null && data2 !== null) {
-          this.setState({NotasPaciente:data}); 
-          this.setState({DescPaciente:data2}); 
+          this.setState({NotasPaciente:data});
+          this.setState({DescPaciente:data2});
         }
       }
 
     setNota(nota) {
-        this.setState({NotasPaciente:nota}); 
-        localStorage.setItem('Notas',this.state.NotasPaciente)
+        this.setState({NotasPaciente:nota});
+        localStorage.setItem('Notas',nota)
+    }
+    setDesc(desc) {
+        this.setState({DescPaciente:desc});
+        localStorage.setItem('DescPaciente',desc)
     }
 
-      componentDidMount() { 
-        // Fetch data from local storage 
-        this.getStateFromLocalStorage(); 
+    componentDidMount() {
+        let nota = (localStorage.getItem('Notas'))
+        let desc = (localStorage.getItem('DescPaciente'))
+
+        this.setState({NotasPaciente:nota})
+        this.setState({DescPaciente:desc})
+
+        // Fetch data from local storage
+        this.getStateFromLocalStorage();
         console.log("Component mounted");
-      } 
+      }
 
       render(){
-        return ( 
+        return (
         <div>
             <Navbar2 />
             <Grid sx = {{marginTop:'10px'}} container spacing={2}>
@@ -74,28 +84,28 @@ export default class PerfilPaciente extends Component {
                     </Grid>
                     <Grid sx= {{border:0}}>
                         <Grid sx={{paddingTop:'1vw',paddingBottom:'1vw',border:0,paddingLeft:'1vw',alignItems:'center',display: 'flex'}}>
-                            <Grid sx={{display:'flex'}}direction='column' spacing={5}>          
+                            <Grid sx={{display:'flex'}}direction='column' spacing={5}>
                                 <h3>
                                     Data de nascimento: 05/03/1972
                                 </h3>
                                 <h3>
                                     Género Feminino
                                 </h3>
-                                <h2>
-                                    Descrição:
-                                </h2>
+                                <h3>
+                                    Número de Utente: 999080114
+                                </h3>
                                 <TextField
-                                    sx={{pr:'0vw',pl:'1vw',pb:'0vw',width:'22vw'}}
+                                    sx={{pr:'0vw',pl:'0vw',pb:'1vw',width:'22vw'}}
                                     id="filled-multiline-static"
                                     multiline
-                                    onChange={(e) => this.setNota(e.target.value)}
+                                    onChange={(e) => this.setDesc(e.target.value)}
                                     rows={4}
-                                    label="Notas"
+                                    label="Descrição"
                                     defaultValue= {this.state.DescPaciente}
                                     variant="filled"
                                     />
                                 <TextField
-                                    sx={{pr:'0vw',pl:'1vw',pb:'0vw',width:'22vw'}}
+                                    sx={{pr:'0vw',pl:'0vw',pb:'0vw',width:'22vw'}}
                                     id="filled-multiline-static"
                                     multiline
                                     onChange={(e) => this.setNota(e.target.value)}
@@ -116,15 +126,11 @@ export default class PerfilPaciente extends Component {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid sx={{border:0,justifyContent:'center',alignItems:'center'}} container item xs={9}>
-
-                    <Grid sx ={{border:0,justifyContent:'center',alignItems:'center',display: 'flex',paddingLeft:'1vw',paddingRight:'1vw'}} item xs={6}>
-                        <Stack direction='column' spacing={5}>        
+                <Grid item xs={9} sx={{paddingBottom:'1vw',border:0, justifyContent:'center',alignItems:'center',pr:'2vw'}}>
+                        <Stack direction='column' spacing={5} sx={{maxHeight:"35vw",overflow:"auto"}}>
                             <Accordion defaultExpanded={true}>
-                               
-                                
                                 <AccordionSummary
-                               
+
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
@@ -144,7 +150,7 @@ export default class PerfilPaciente extends Component {
                                 />
 
                                 </AccordionDetails>
-                                
+                        
                             </Accordion>
                             <Accordion defaultExpanded={true}>
                                 <AccordionSummary
@@ -169,112 +175,43 @@ export default class PerfilPaciente extends Component {
 
                                 </AccordionDetails>
                             </Accordion>
-                            <Accordion>
+
+                            {consultas.slice(2).map((consulta) => (
+                                <Accordion defaultExpanded={false}>
                                 <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                                 >
-                                <Typography>Consulta dia {consultas[ ((this.state.page*8)-6) ].date}</Typography>
+                                <Typography>Consulta dia {consulta.date}</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="name"
+                                    label="Resumo:"
+                                    defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                    malesuada lacus ex, sit amet blandit leo lobortis eget."
+                                    type="text"
+                                    fullWidth
+                                    variant="standard"
+                                />
+
                                 </AccordionDetails>
-                            </Accordion>
-                            <Accordion>
-                                <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                                >
-                                <Typography>Consulta dia {consultas[ ((this.state.page*8)-5) ].date}</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                                </AccordionDetails>
-                            </Accordion>
-                        </Stack>
+                                </Accordion>
+                            ))}
+                            
+                        </Stack> 
+
+                    {/* <Pagination count={5} page={this.state.page} onChange={(event, value) => {this.setState({page:value})}} >
+
+                    </Pagination> */}
                     </Grid>
-
-                    <Grid sx ={{border:0,justifyContent:'center',alignItems:'center',display: 'flex',paddingLeft:'1vw',paddingRight:'1vw'}} item xs={6}>
-                        <Stack direction='column' spacing={5}>        
-                        <Accordion>
-                                <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                                >
-                                <Typography>Consulta dia {consultas[ ((this.state.page*8)-4) ].date}</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                                </AccordionDetails>
-                            </Accordion>
-                            <Accordion>
-                                <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                                >
-                                <Typography>Consulta dia {consultas[ ((this.state.page*8)-3) ].date}</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                                </AccordionDetails>
-                            </Accordion>
-                            <Accordion>
-                                <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                                >
-                                <Typography>Consulta dia {consultas[ ((this.state.page*8)-2) ].date}</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                                </AccordionDetails>
-                            </Accordion>
-                            <Accordion>
-                                <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                                >
-                                <Typography>Consulta dia {consultas[ ((this.state.page*8)-1) ].date}</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                                </AccordionDetails>
-                            </Accordion>
-                        </Stack>
-                    </Grid> 
-
-                    <Pagination count={5} page={this.state.page} onChange={(event, value) => {this.setState({page:value})}} >
-
-                    </Pagination>
-
                 </Grid>
-            </Grid>
-         </div>
-        
+
+        </div>
+
     );
 
     }

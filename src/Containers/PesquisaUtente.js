@@ -79,7 +79,7 @@ function PesquisaUtente() {
           <Grid item xs={6} sx ={{justifyContent:'right',alignItems:'center',display:'flex'}}>
             <NavLink to = '/PerfilPaciente'>
               <Button variant='contained'>
-                  Pesquisar
+                  Ir
               </Button>
             </ NavLink>
           </Grid>

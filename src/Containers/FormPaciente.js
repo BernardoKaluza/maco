@@ -17,6 +17,11 @@ import FormLabel from '@mui/material/FormLabel';
 
 
 function FormPaciente  ()  {
+
+  const setNota=(nota)=> {
+    localStorage.setItem('Notas',nota)
+  }
+
   return (
     <>
       <Navbar2 />
@@ -41,7 +46,7 @@ function FormPaciente  ()  {
             </TextField>
           </Grid>
           <Grid item xs={12} sx={{height:'5vw',justifyContent:'center',alignItems:'center',display: 'flex'}}>
-            <TextField variant='outlined' label ='Nota (opcional)' sx ={{width:'99%'}}>
+            <TextField  onChange={(e) => setNota(e.target.value)} variant='outlined' label ='Nota (opcional)' sx ={{width:'99%'}}>
             </TextField>
           </Grid>
 

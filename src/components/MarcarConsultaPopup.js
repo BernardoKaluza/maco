@@ -4,14 +4,21 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import { DateTimePicker } from '@mui/x-date-pickers';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+
 
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import MomentUtils from '@date-io/moment';
+
 
 import Autocomplete from '@mui/material/Autocomplete';
 
@@ -29,8 +36,14 @@ export default function MarcarConsultaPopup(props) {
 
   const [open, setOpen] = React.useState(true);
   const [Titulo,setTitulo] = useState('')
-  const [data, setData] = useState('')
+  const [data, setData] = React.useState(new Date(props.data));
 
+
+
+  
+  const handledatachange = (newValue) => {
+    setData(newValue);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -56,7 +69,7 @@ export default function MarcarConsultaPopup(props) {
     //window.location.reload(false);
     
     setOpen(false);
-    if (props.submit!=null) props.submit(Titulo,nomeUtente, data) //! REPARAR
+    if (props.submit!=null) props.submit(Titulo,nomeUtente) //! REPARAR
     if (props.close!=null) props.close()
   }
 
@@ -70,18 +83,23 @@ export default function MarcarConsultaPopup(props) {
       {/* <Button variant="outlined" onClick={handleClickOpen}>
         Marcar Consulta
       </Button> */}
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog fullWidth open={open} onClose={handleClose}>
         <DialogTitle>Marcar Consulta</DialogTitle>
         <DialogContent>
           <form noValidate autoComplete="off" >
-            <TextField 
-              InputLabelProps={{shrink: true}} 
-              label ='Data de Marcação (Opcional)' 
-              type = 'date' variant='outlined' 
-              onChange={(e) => setData(e.target.value)}
-              sx ={{width:'99%'}}>
+          <CssBaseline >
+            <LocalizationProvider  fullWidth dateAdapter={AdapterDateFns}>
+              <DateTimePicker
+                value={data}
+                onChange={handledatachange}
+                renderInput={(params) => <TextField {...params} fullWidth/>}
+              />
+            </LocalizationProvider>
+          </CssBaseline >
 
-            </TextField>
+
+          
+         
               <TextField
                 sx={{
                   display:'flex',

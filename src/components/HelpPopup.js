@@ -6,6 +6,10 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import { useState } from 'react'
 import IconButton from '@mui/material/IconButton';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+
+
 
 import Avatar from '@mui/material/Avatar';
 
@@ -60,9 +64,16 @@ export default function MarcarConsultaPopup(props) {
 
   return (
     <div>
-    <IconButton sx={{display:'flex'}} onClick={handleClickOpen} color="primary" aria-label="upload picture" component="span">
-        <Avatar sx={{height:'3vw'}}  alt="ERROR" src={ require("../image/quest.png")} />
-    </IconButton>
+      <Grid container>
+        <Grid item xs={6} sx={{justifyContent:'center',alignItems:'center',display: 'flex'}}>
+          <h2 onClick={handleClickOpen}>Ajuda</h2>
+        </Grid>
+        <Grid xs={6} sx={{justifyContent:'center',alignItems:'center',display: 'flex'}}>
+          <IconButton sx={{display:'flex'}} onClick={handleClickOpen} color="primary" aria-label="upload picture" component="span">
+              <Avatar sx={{height:'3vw'}}  alt="ERROR" src={ require("../image/quest.png")} />
+          </IconButton>
+        </Grid>
+      </Grid>
       <Dialog maxWidth='md'open={open} onClose={handleClose}>
         <DialogContent>
         <img src={ require("../image/help.gif")} />

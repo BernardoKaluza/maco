@@ -18,7 +18,6 @@ import MuiAlert from '@mui/material/Alert';
 
 
 var calendarApi = null
-var select = null
 var click = null
 
 
@@ -38,6 +37,7 @@ export default class DemoApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {popupopen: false,
+                  select:null,
                   snack: false,
                   popupstate: { title: "",
                                 paciente: "",
@@ -91,8 +91,10 @@ export default class DemoApp extends React.Component {
             eventRemove={function(){}}
             */
           />
+          
       </div>
-      { this.state.popupopen && <MarcarConsultaPopup close={this.handlePopupClose.bind(this)} submit={this.handlePopupSubmit.bind(this)} />} 
+      
+      { this.state.popupopen && <MarcarConsultaPopup data={localStorage.getItem('select')} close={this.handlePopupClose.bind(this)} submit={this.handlePopupSubmit.bind(this)} />} 
       { this.state.daropen &&   <DarConsultaPopup    close={this.handlePopupClose.bind(this)} descricao= { click.event.title } paciente={ click.event.extendedProps.paciente} delete={this.handleapagar.bind(this)}/>}
       
       {this.state.snack && 
@@ -187,13 +189,13 @@ export default class DemoApp extends React.Component {
       this.handlesnackOpen() ;
     }
    
-  }
-  
+  } 
   handlePopupSubmit = (title, paciente) => {
     const result = { title: title, paciente: paciente };
     this.setState(
       {popupstate: result}
     );
+    let select = localStorage.getItem('select')
     console.log(result);
     // console.log(select.startStr);
           // while(this.state.popupopen){
@@ -205,6 +207,7 @@ export default class DemoApp extends React.Component {
             title,
             start: select.startStr,
             end: select.endStr,
+
             allDay: select.allDay,
             //random readable color
             //backgroundColor: '#'+((1<<24)*Math.random()|0).toString(16)
@@ -229,16 +232,18 @@ export default class DemoApp extends React.Component {
     }
      // clear date selection
     else{
+      
+      console.log("selectingo", selectInfo)
+      localStorage.setItem('select', (selectInfo.startStr))
+      console.log( localStorage.getItem('select'))
+      
       this.setState({popupstate: { title: "", paciente: ""}});
       this.setState({popupopen: true});
-      select=selectInfo
+    
       //let title = prompt('Escolha um tÃ­tulo para o evento')
       
       //calendarApi.unselect()
     
-     
-      
-      
      
 
       calendarApi.unselect()
