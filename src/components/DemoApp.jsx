@@ -195,6 +195,7 @@ export default class DemoApp extends React.Component {
       {popupstate: result}
     );
     console.log(result);
+    // console.log(select.startStr);
           // while(this.state.popupopen){
         //   console.log("waiting"); //! wait for popup to close
         // }

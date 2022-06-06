@@ -123,6 +123,7 @@ export default class Home extends Component {
             />
             </Grid>
             <Grid sx={{paddingTop:'1vw',paddingBottom:'1vw', justifyContent:'right',alignItems:'center',display: 'flex',paddingTop:'14vw'}}>
+              <h2 onClick={this.openHelp}>Ajuda</h2>
               <div onClick={this.openHelp} sx ={{display:'flex'}}>
                 <HelpPopup/>
               </div>

@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+import { DateTimePicker } from '@mui/x-date-pickers';
 
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react'
@@ -28,7 +29,7 @@ export default function MarcarConsultaPopup(props) {
 
   const [open, setOpen] = React.useState(true);
   const [Titulo,setTitulo] = useState('')
-
+  const [data, setData] = useState('')
 
 
   const handleClickOpen = () => {
@@ -41,7 +42,7 @@ export default function MarcarConsultaPopup(props) {
   
   };
   const handleCloseSend = () => {
-    
+    console.log("handleCloseSend", data)
     console.log(Titulo)
     console.log(nomeUtente)
     console.log(numeroUtente)
@@ -55,7 +56,7 @@ export default function MarcarConsultaPopup(props) {
     //window.location.reload(false);
     
     setOpen(false);
-    if (props.submit!=null) props.submit(Titulo,nomeUtente) //! REPARAR
+    if (props.submit!=null) props.submit(Titulo,nomeUtente, data) //! REPARAR
     if (props.close!=null) props.close()
   }
 
@@ -73,6 +74,14 @@ export default function MarcarConsultaPopup(props) {
         <DialogTitle>Marcar Consulta</DialogTitle>
         <DialogContent>
           <form noValidate autoComplete="off" >
+            <TextField 
+              InputLabelProps={{shrink: true}} 
+              label ='Data de Marcação (Opcional)' 
+              type = 'date' variant='outlined' 
+              onChange={(e) => setData(e.target.value)}
+              sx ={{width:'99%'}}>
+
+            </TextField>
               <TextField
                 sx={{
                   display:'flex',

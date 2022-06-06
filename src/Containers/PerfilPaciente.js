@@ -1,21 +1,15 @@
 import * as React from 'react';
 import { Component } from 'react';
-import {useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+
 import Grid from '@mui/material/Grid';
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import CardHeader from '@mui/material/CardHeader';
+
 import Avatar from '@mui/material/Avatar';
-import { margin } from '@mui/system';
-import Button from '@mui/material/Button';
 import Navbar2 from '../components/Navbar2'
-import { NavLink } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import {useState}  from "react";
+import TextField from '@mui/material/TextField';
+
+
 
 import { pacienteConsultas as consultas } from '../data/pacienteConsultas';
 
@@ -54,7 +48,12 @@ export default class PerfilPaciente extends Component {
           this.setState({DescPaciente:data2}); 
         }
       }
-  
+
+    setNota(nota) {
+        this.setState({NotasPaciente:nota}); 
+        localStorage.setItem('Notas',this.state.NotasPaciente)
+    }
+
       componentDidMount() { 
         // Fetch data from local storage 
         this.getStateFromLocalStorage(); 
@@ -85,12 +84,29 @@ export default class PerfilPaciente extends Component {
                                 <h2>
                                     Descrição:
                                 </h2>
-                                <h3>
-                                    {this.state.DescPaciente}
-                                </h3>
-                                <h3>
-                                    Notas: {this.state.NotasPaciente}
-                                </h3>
+                                <TextField
+                                    sx={{pr:'0vw',pl:'1vw',pb:'0vw',width:'22vw'}}
+                                    id="filled-multiline-static"
+                                    multiline
+                                    onChange={(e) => this.setNota(e.target.value)}
+                                    rows={4}
+                                    label="Notas"
+                                    defaultValue= {this.state.DescPaciente}
+                                    variant="filled"
+                                    />
+                                <TextField
+                                    sx={{pr:'0vw',pl:'1vw',pb:'0vw',width:'22vw'}}
+                                    id="filled-multiline-static"
+                                    multiline
+                                    onChange={(e) => this.setNota(e.target.value)}
+                                    rows={4}
+                                    label="Notas"
+                                    defaultValue= {this.state.NotasPaciente}
+                                    variant="filled"
+                                    />
+
+
+
                             </Grid>
                         </Grid>
                         <Grid sx={{paddingTop:'1vw',paddingBottom:'1vw',border:0, justifyContent:'center',alignItems:'center',display: 'flex'}}>
@@ -116,9 +132,17 @@ export default class PerfilPaciente extends Component {
                                 <Typography>Consulta dia {consultas[ ((this.state.page*8)-8) ].date}</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                <Typography>
-                                    Consulta ainda não realizada
-                                </Typography>
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="name"
+                                    label="Resumo:"
+                                    defaultValue="Consulta ainda não realizada"
+                                    type="text"
+                                    fullWidth
+                                    variant="standard"
+                                />
+
                                 </AccordionDetails>
                                 
                             </Accordion>
@@ -131,10 +155,18 @@ export default class PerfilPaciente extends Component {
                                 <Typography>Consulta dia {consultas[ ((this.state.page*8)-7) ].date}</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="name"
+                                    label="Resumo:"
+                                    defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                    malesuada lacus ex, sit amet blandit leo lobortis eget."
+                                    type="text"
+                                    fullWidth
+                                    variant="standard"
+                                />
+
                                 </AccordionDetails>
                             </Accordion>
                             <Accordion>

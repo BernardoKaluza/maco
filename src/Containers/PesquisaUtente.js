@@ -10,12 +10,22 @@ import Box from '@mui/system/Box';
 import Button from '@mui/material/Button';
 import { NavLink } from 'react-router-dom';
 import Container from '@mui/material/Container';
+import { useNavigate } from "react-router-dom"
 
 function PesquisaUtente() {
+  let navigate = useNavigate();
+  const handlenomeChange = (event,value) => {
+    console.log(value)
+    if(value=="Sofia Wilson"){
+      console.log("teste");
+      navigate("/PerfilPaciente");
+    }
+  }
+
   return (
     <React.Fragment>
       <Navbar2 />
-      <Container sx={{justifyContent:'center',alignItems:'center',display:'flex',paddingTop:'5vw',pb:'5vw'}}>
+      <Container sx={{justifyContent:'center',alignItems:'center',display:'flex',paddingTop:'3vw',pb:'3vw'}}>
         <h1 sx={{justifyContent:'center',alignItems:'center'}}>Pesquisa de Utentes</h1>
       </Container>
      
@@ -25,6 +35,7 @@ function PesquisaUtente() {
             freeSolo
             id="Search Name"
             disableClearable
+            onInputChange={(event, value) => {handlenomeChange(event,value)}}
             options={utentes.map((option) => option.Name)}
             renderInput={(params) => (
               <TextField
@@ -39,7 +50,7 @@ function PesquisaUtente() {
           />
         </Grid>
 
-        <Grid sx={{height:'6vw',Width:"flex",justifyContent:'center',allignItems:'center',display: 'flex',}} item xs={12}>
+        <Grid sx={{height:'5vw',Width:"flex",justifyContent:'center',allignItems:'center',display: 'flex',}} item xs={12}>
         <Box sx={{marginTop:'1.5vw'}}><h2> OU  </h2> </Box>
         </Grid>
 
@@ -64,7 +75,7 @@ function PesquisaUtente() {
           />
 
         </Grid>
-        <Grid sx={{paddingTop:'5vw',justifyContent:'center',alignItems:'center',display: 'flex'}} container spacing={4} item xs={12}>
+        <Grid sx={{paddingTop:'3vw',justifyContent:'center',alignItems:'center',display: 'flex'}} container spacing={4} item xs={12}>
           <Grid item xs={6} sx ={{justifyContent:'right',alignItems:'center',display:'flex'}}>
             <NavLink to = '/PerfilPaciente'>
               <Button variant='contained'>

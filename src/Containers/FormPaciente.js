@@ -22,7 +22,7 @@ function FormPaciente  ()  {
       <Navbar2 />
       <Container sx={{width:'30vw'}} >
         <Grid container spacing={1}>
-        <Container sx={{justifyContent:'center',alignItems:'center',display:'flex',paddingTop:'5vw',pb:'5vw'}}>
+        <Container sx={{justifyContent:'center',alignItems:'center',display:'flex',paddingTop:'5vw',pb:'3vw'}}>
             <h1 sx={{justifyContent:'center',alignItems:'center'}}>Adicionar Utente</h1>
         </Container>
 
@@ -38,6 +38,10 @@ function FormPaciente  ()  {
           
           <Grid item xs={12} sx={{height:'5vw',justifyContent:'center',alignItems:'center',display: 'flex'}}>
             <TextField variant='outlined' label ='Número de Utente' sx ={{width:'99%'}}>
+            </TextField>
+          </Grid>
+          <Grid item xs={12} sx={{height:'5vw',justifyContent:'center',alignItems:'center',display: 'flex'}}>
+            <TextField variant='outlined' label ='Nota (opcional)' sx ={{width:'99%'}}>
             </TextField>
           </Grid>
 
