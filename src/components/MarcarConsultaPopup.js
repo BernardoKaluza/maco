@@ -55,7 +55,7 @@ export default function MarcarConsultaPopup(props) {
   
   };
   const handleCloseSend = () => {
-    console.log("handleCloseSend", data)
+    console.log("handleCloseSend", data.toISOString())
     console.log(Titulo)
     console.log(nomeUtente)
     console.log(numeroUtente)
@@ -69,8 +69,10 @@ export default function MarcarConsultaPopup(props) {
     //window.location.reload(false);
     
     setOpen(false);
-    if (props.submit!=null) props.submit(Titulo,nomeUtente) //! REPARAR
+    if (props.submit!=null) props.submit(Titulo,nomeUtente, data) //! REPARAR
     if (props.close!=null) props.close()
+
+ 
   }
 
 

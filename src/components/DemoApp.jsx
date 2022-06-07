@@ -94,7 +94,7 @@ export default class DemoApp extends React.Component {
           
       </div>
       
-      { this.state.popupopen && <MarcarConsultaPopup data={localStorage.getItem('select')} close={this.handlePopupClose.bind(this)} submit={this.handlePopupSubmit.bind(this)} />} 
+      { this.state.popupopen && <MarcarConsultaPopup data={JSON.parse(localStorage.getItem('select')).startStr} close={this.handlePopupClose.bind(this)} submit={this.handlePopupSubmit.bind(this)} />} 
       { this.state.daropen &&   <DarConsultaPopup    close={this.handlePopupClose.bind(this)} descricao= { click.event.title } paciente={ click.event.extendedProps.paciente} delete={this.handleapagar.bind(this)}/>}
       
       {this.state.snack && 
@@ -190,13 +190,22 @@ export default class DemoApp extends React.Component {
     }
    
   } 
-  handlePopupSubmit = (title, paciente) => {
+  handlePopupSubmit = (title, paciente, popupdata) => {
     const result = { title: title, paciente: paciente };
     this.setState(
       {popupstate: result}
     );
-    let select = localStorage.getItem('select')
-    console.log(result);
+    let select = JSON.parse(localStorage.getItem('select'))
+    if (popupdata) {
+      select.startStr = popupdata
+      let date = new Date(select.startStr)
+      console.log("date ",date)
+      let newdate = new Date(date.getTime() + (30 * 60 * 1000))
+      console.log("newdate ",newdate.toISOString())
+      select.endStr = newdate.toISOString()
+    }
+    
+    
     // console.log(select.startStr);
           // while(this.state.popupopen){
         //   console.log("waiting"); //! wait for popup to close
@@ -234,8 +243,8 @@ export default class DemoApp extends React.Component {
     else{
       
       console.log("selectingo", selectInfo)
-      localStorage.setItem('select', (selectInfo.startStr))
-      console.log( localStorage.getItem('select'))
+      localStorage.setItem('select', JSON.stringify(selectInfo))
+      console.log( JSON.parse(localStorage.getItem('select')))
       
       this.setState({popupstate: { title: "", paciente: ""}});
       this.setState({popupopen: true});
