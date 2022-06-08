@@ -15,7 +15,6 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import DemoApp from '../components/DemoApp';
 
-import AtualizarPacientePopup from '../components/AtualizarPacientePopup';
 
 
 import Radio from '@mui/material/Radio';

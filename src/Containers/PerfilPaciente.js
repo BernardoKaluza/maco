@@ -8,12 +8,12 @@ import Navbar2 from '../components/Navbar2'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-
+import Button from '@mui/material/Button';
 
 
 import { pacienteConsultas as consultas } from '../data/pacienteConsultas';
 
-import FormDialog from '../components/AtualizarPacientePopup';
+
 
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -36,6 +36,7 @@ export default class PerfilPaciente extends Component {
             page:1,
             DescPaciente:"",
             NotasPaciente:"",
+            open:false,
         }
 
     }
@@ -69,6 +70,9 @@ export default class PerfilPaciente extends Component {
         this.getStateFromLocalStorage();
         console.log("Component mounted");
       }
+
+
+     
 
       render(){
         return (
@@ -120,9 +124,10 @@ export default class PerfilPaciente extends Component {
                             </Grid>
                         </Grid>
                         <Grid sx={{paddingTop:'1vw',paddingBottom:'1vw',border:0, justifyContent:'center',alignItems:'center',display: 'flex'}}>
-                            <FormDialog>
-                                Atualizar Perfil
-                            </FormDialog>
+                    <Button>
+                        Guardar
+                    </Button>
+               
                         </Grid>
                     </Grid>
                 </Grid>
