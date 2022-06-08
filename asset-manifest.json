@@ -1,7 +1,7 @@
 {
   "main.css": "/maco/static/css/main.1d2d9beb.chunk.css",
-  "main.js": "/maco/static/js/main.9065314a.chunk.js",
-  "main.js.map": "/maco/static/js/main.9065314a.chunk.js.map",
+  "main.js": "/maco/static/js/main.4299ed88.chunk.js",
+  "main.js.map": "/maco/static/js/main.4299ed88.chunk.js.map",
   "static/js/1.c91f8be6.chunk.js": "/maco/static/js/1.c91f8be6.chunk.js",
   "static/js/1.c91f8be6.chunk.js.map": "/maco/static/js/1.c91f8be6.chunk.js.map",
   "static/css/2.d8ce9f9e.chunk.css": "/maco/static/css/2.d8ce9f9e.chunk.css",
@@ -15,6 +15,6 @@
   "static/css/main.1d2d9beb.chunk.css.map": "/maco/static/css/main.1d2d9beb.chunk.css.map",
   "static/css/2.d8ce9f9e.chunk.css.map": "/maco/static/css/2.d8ce9f9e.chunk.css.map",
   "index.html": "/maco/index.html",
-  "precache-manifest.27358b49b1869a56ae5df05d728d7439.js": "/maco/precache-manifest.27358b49b1869a56ae5df05d728d7439.js",
+  "precache-manifest.da664da25321df3483219e062e6b749e.js": "/maco/precache-manifest.da664da25321df3483219e062e6b749e.js",
   "service-worker.js": "/maco/service-worker.js"
 }
