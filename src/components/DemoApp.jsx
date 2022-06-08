@@ -177,7 +177,9 @@ export default class DemoApp extends React.Component {
   }
 
   handleapagar = () => {
-    click.event.remove()
+    if (window.confirm('Tem a certeza que quer apagar?')) {
+      click.event.remove()
+    }
   }
   handlePopupClose = (arg) => {
     this.setState({popupopen: false});
